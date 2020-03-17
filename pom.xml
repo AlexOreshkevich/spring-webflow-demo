@@ -19,6 +19,16 @@
 	</properties>
 
 	<dependencies>
+
+		<!-- Make sure that you have that dependency in your local repo -->
+		<dependency>
+			<artifactId>shared</artifactId>
+			<groupId>com.rednavis</groupId>
+			<version>1.0-SNAPSHOT</version>
+			<type>jar</type>
+		</dependency>
+
+    <!-- original dependencies -->
 		<dependency>
 			<groupId>org.springframework.webflow</groupId>
 			<artifactId>spring-webflow</artifactId>
@@ -57,17 +67,25 @@
 			<version>8.0.1</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.wildfly</groupId>
+			<artifactId>wildfly-client-all</artifactId>
+			<version>18.0.1.Final</version>
+		</dependency>
 	</dependencies>
 
 	<build>
-		<sourceDirectory>src</sourceDirectory>
+		<defaultGoal>package tomee:run</defaultGoal>
+		<finalName>spring-webflow-demo</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.tomee.maven</groupId>
 				<artifactId>tomee-maven-plugin</artifactId>
 				<version>8.0.1</version>
 				<configuration>
-					<tomeeHttpPort>8080</tomeeHttpPort>
+					<tomeeHttpPort>8081</tomeeHttpPort>
+					<tomeeAjpPort>8010</tomeeAjpPort>
+					<tomeeShutdownPort>8006</tomeeShutdownPort>
 					<context>spring-mvc-webflow</context>
 					<reloadOnUpdate>true</reloadOnUpdate>
 					<tomeeClassifier>plume</tomeeClassifier>
